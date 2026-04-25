@@ -42,6 +42,8 @@
 </p>
 <img src="frontsquatexample.png"/>
 
+<div id="data" style="text-align: left;"></div>
+
 <h2>Ohjeet</h2>
 
 <h3>1. Lataa WodConnectista harjoitusdatasi asetuksien kautta (kts. kuva)</h3>
@@ -223,7 +225,7 @@ function transformJournalToCSV(journalRows) {
       .map(w => Number(w))
       .filter(w => !isNaN(w));
       
-    console.log(weights);
+    //console.log(weights);
 
     let weightIndex = 0;
 
@@ -278,6 +280,36 @@ function downloadCSV(data, filename = "wodboardiin.csv") {
 }
 
 
+function createResults(transformed) {
+
+  let dataRows = transformed.map(t => {
+    return `<tr>
+        <td>${t.Date}</td>
+        <td>${t.Name}</td>
+        <td>${t.Sets}</td>
+        <td>${t.Reps}</td>
+        <td>${t.Weight}</td>
+      </tr>`;
+    }).join("\n");
+
+ const template = 
+ `
+ <table style="margin: auto;">
+   <tr>
+     <th style="min-width: 150px;">Date</th>
+     <th style="min-width: 150px;">Name</th>
+     <th style="min-width: 50px;">Sets</th>
+     <th style="min-width: 50px;">Reps</th>
+     <th style="min-width: 50px;">Weight</th>
+   </tr>
+   ${dataRows}
+ </table>
+ `;
+ 
+  document.getElementById("data").innerHTML = template;
+}
+
+
 // --- FILE HANDLER ---
 async function handleFile(file) {
   console.log("Processing file...");
@@ -285,7 +317,7 @@ async function handleFile(file) {
   const data = await file.arrayBuffer();
   const workbook = XLSX.read(data);
   
-  console.log(workbook);
+  //console.log(workbook);
 
   const sheet = workbook.Sheets[workbook.SheetNames[0]];
   const rows = XLSX.utils.sheet_to_json(sheet, {
@@ -304,6 +336,7 @@ async function handleFile(file) {
   const transformed = transformJournalToCSV(rows);
   //console.log("Transformed:", transformed);
   
+  createResults(transformed);
   downloadCSV(transformed);
 }
 </script>
