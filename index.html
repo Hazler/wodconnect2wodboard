@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Workout Converter</title>
+  <title>WodConnect2WodBoard</title>
   <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
   <style>
     body {
@@ -11,6 +11,10 @@
       color: #fff;
       text-align: center;
       padding: 40px;
+      margin: auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
     }
     #drop {
       border: 2px dashed #888;
@@ -21,10 +25,29 @@
     #drop.hover {
       border-color: #0f0;
     }
+    div {
+      background-color: #222;
+      border-radius: 5px;
+      padding: 20px 60px;
+      margin: 10px;
+    }
+    #main {
+      max-width:1000px; 
+    }
+    #data {
+      max-width: 500px;
+    }
+    
+    @media screen and (max-width: 1000px) {
+      body {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
-<body>
+<body style="margin: auto; text-align: center;">
 
+<div id="main">
 <h1>WodConnect -voimatreenien siirto WodBoardiin</h1>
 
 <div id="drop">
@@ -36,23 +59,33 @@
 <input type="file" id="fileInput" hidden />
 
 
+<div>
 <h3>HUOM!</h3>
 <p>WodConnectista haetusta datasta poimitaan sellaiset voimatreenit, mitkä on helposti parsittavissa. Monimutkaisia yhdistelmätreenejä ei tuoda (esim. <i>3-point-snatch</i>, tai <i>Liike + toinen liike</i>).</p>
 <p>Jokaisesta setistä, jossa on joko <i>a) eri paino</i> tai <i>b) eri toistomäärä</i> tulee erillinen merkintä. Tämä tarkoittaa, että esim. 3x1 toiston etukyykyt vaihtuvilla painoilla raportoidaan näin:
 </p>
-<img src="frontsquatexample.png"/>
+<img src="frontsquatexample.png" style="width: 100%;"/>
+</div>
 
-<div id="data" style="text-align: left;"></div>
 
+<div>
 <h2>Ohjeet</h2>
 
 <h3>1. Lataa WodConnectista harjoitusdatasi asetuksien kautta (kts. kuva)</h3>
-<img src="downloadexcel.png" />
+<img src="downloadexcel.png"  style="width: 100%;" />
 
 <h3>2. Pudota/lisää kyseinen WodConnectista ladattu tiedosto yllä olevaan laatikkoon.</h3>
 
 <h3>3. Siirry WodBoardin sivulle syöttämään voimatreenien datat. <b>Sinun täytyy olla kirjautunut WodBoardiin!</b></h3>
+</div>
 
+</div>
+<div id="output">
+ <h2>Treenien muutoksen tulokset</h2>
+ <div id="data" style="text-align: center;">
+  Tähän tulee näkyviin ne tiedot, mitä WodBoardiin vietävään tiedostoon päätyy.
+ </div>
+</div>
 <script>
 const drop = document.getElementById("drop");
 const fileInput = document.getElementById("fileInput");
@@ -157,7 +190,6 @@ function transformJournalToCSV(journalRows) {
         comment = "Pause back squat [wodconnect]";
       }
       if (name == "Jerk") {
-        // tämä päätyy wodboardiin split jerkkinä
         comment = "Jerk [wodconnect]";
       }
       if (name == "Slow pull Power snatch") {
@@ -279,10 +311,21 @@ function downloadCSV(data, filename = "wodboardiin.csv") {
   a.click();
 }
 
+function getCorrectName(data, index) {
+  if (data?.Name.toLowerCase() == "jerk") {
+    return `<select id="jerk${index}">
+      <option value="Split jerk">Split jerk</option>
+      <option value="Push jerk">Push jerk</option>    
+    </select>`;
+  }
+
+  return data?.Name;
+}
+
 
 function createResults(transformed) {
 
-  let dataRows = transformed.map(t => {
+  let dataRows = transformed.map((t, i) => {
     return `<tr>
         <td>${t.Date}</td>
         <td>${t.Name}</td>
@@ -291,10 +334,18 @@ function createResults(transformed) {
         <td>${t.Weight}</td>
       </tr>`;
     }).join("\n");
+  
+let infoTemplate = "";  
+//if (transformed.some(t => t.Name.toLowerCase() == "jerk")) {
+//  infoTemplate = `<div id="movement-info" style="margin-bottom: 10px;">
+//  Listasta löytyi "Jerk", mutta WodBoardista ei löydy liikettä vastaavalla nimellä, vaan sen on oltava joko "Push jerk" tai "Split jerk". Voit valita rivikohtaisesti kumpaa haluat käyttää, tai vaihtoehtoisesti olla koskematta näihin riveihin. WodBoard ilmoittaa, mikäli jotain liikkeitä ei saada vietyä järjestelmään.
+//  </div>`;
+//}
 
  const template = 
  `
- <table style="margin: auto;">
+ ${infoTemplate}
+ <table style="margin: auto; text-align: left;">
    <tr>
      <th style="min-width: 150px;">Date</th>
      <th style="min-width: 150px;">Name</th>
@@ -307,6 +358,7 @@ function createResults(transformed) {
  `;
  
   document.getElementById("data").innerHTML = template;
+  document.getElementById("output").scrollIntoView();
 }
 
 
