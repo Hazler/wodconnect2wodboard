@@ -136,9 +136,9 @@ function transformJournalToCSV(journalRows) {
     while (name.includes("*"))
       name = name.replace("*", "")
       
-      if (name == "(Squat) snatch") {
+      if (name == "(Squat) Snatch") {
         name = "Snatch";
-        comment = "(Squat) snatch [wodconnect]";
+        comment = "(Squat) Snatch [wodconnect]";
       }
       if (name.startsWith("Find"))
         name = name.substring(5);
