@@ -41,7 +41,11 @@
       font-size: small;
       padding-top: 0px;
       margin-top: 0px;
+      color: #aaa;
+    }
+    a {
       color: gray;
+      font-weight: bold;
     }
     
     @media screen and (max-width: 1000px) {
@@ -49,8 +53,16 @@
         flex-direction: column;
       }
       
+      h1 {
+        font-size: 50px;
+      }
+      
       div,p {      
-        font-size: 22px;
+        font-size: 30px;
+      }
+      
+      #lastModified,span {
+        font-size: 20px;
       }
       
       #data {
@@ -70,7 +82,7 @@
   Raahaa WodConnectista ladattu excel-tiedosto tähän<br>tai klikkaa lisätäksesi tiedosto.<br><br>Tiedoston pitäisi latautua automaattisesti laitteellesi nimellä <b>wodboardiin.csv</b>.
 </div>
 
-<div style="margin: 10px;">Muutettuasi WodConnectin treenit WodBoardiin sopivaan muotoon, <a href="https://www.wodboard.com/import/custom_training_data/new" target="_blank" style="color: gray;">siirry tästä WodBoardiin syöttämään tiedot</a>.</div>
+<div style="margin: 10px;">Muutettuasi WodConnectin treenit WodBoardiin sopivaan muotoon, <a href="https://www.wodboard.com/import/custom_training_data/new" target="_blank">siirry tästä WodBoardiin syöttämään tiedot</a>.</div>
 
 <input type="file" id="fileInput" hidden />
 
@@ -81,6 +93,7 @@
 <p>Jokaisesta setistä, jossa on joko <i>a) eri paino</i> tai <i>b) eri toistomäärä</i> tulee erillinen merkintä. Tämä tarkoittaa, että esim. 3x1 toiston etukyykyt vaihtuvilla painoilla raportoidaan näin:
 </p>
 <img src="frontsquatexample.png" style="width: 100%;"/>
+<span>WodBoardiin käsin lisäämällä tämän saa merkityksi <i>Front Squat 3x1 @ 83, 85, 88kg</i></span>
 </div>
 
 
@@ -90,9 +103,9 @@
 <h3>1. Lataa WodConnectista harjoitusdatasi asetuksien kautta (kts. kuva)</h3>
 <img src="downloadexcel.png"  style="width: 100%;" />
 
-<h3>2. Pudota/lisää kyseinen WodConnectista ladattu tiedosto yllä olevaan laatikkoon.</h3>
+<h3>2. Pudota/lisää kyseinen WodConnectista ladattu tiedosto yllä olevaan <a href="#drop">laatikkoon</a>.</h3>
 
-<h3>3. Siirry WodBoardin sivulle syöttämään voimatreenien datat. <b>Sinun täytyy olla kirjautunut WodBoardiin!</b></h3>
+<h3>3. Siirry <a href="https://www.wodboard.com/import/custom_training_data/new" target="_blank">WodBoardin sivulle</a> syöttämään voimatreenien datat. <b>Sinun täytyy olla kirjautunut WodBoardiin!</b></h3>
 </div>
 
 </div>
@@ -105,7 +118,7 @@
 <script>
 
 if(document.lastModified){
-    document.getElementById('lastModified').innerHTML= `Viimeksi päivitetty: ${new Date(document.lastModified).toLocaleString()}. Tarkista muutoshistoria <a href="https://github.com/Hazler/wodconnect2wodboard/commits/main/" target="_blank" style="color: #aaa; font-weight: bold;">täältä</a>`;
+    document.getElementById('lastModified').innerHTML= `Viimeksi päivitetty: ${new Date(document.lastModified).toLocaleString()}. Tarkista muutoshistoria <a href="https://github.com/Hazler/wodconnect2wodboard/commits/main/" target="_blank" style="font-weight: bold;">täältä</a>`;
 }
 
 const drop = document.getElementById("drop");
