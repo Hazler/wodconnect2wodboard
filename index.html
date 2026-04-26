@@ -47,6 +47,9 @@
       color: gray;
       font-weight: bold;
     }
+    img {
+      width: 100%;
+    }
     
     @media screen and (max-width: 1000px) {
       body {
@@ -92,7 +95,7 @@
 <p>WodConnectista haetusta datasta poimitaan sellaiset voimatreenit, mitkä on helposti parsittavissa. Monimutkaisia yhdistelmätreenejä ei tuoda (esim. <i>3-point-snatch</i>, tai <i>Liike + toinen liike</i>).</p>
 <p>Jokaisesta setistä, jossa on joko <i>a) eri paino</i> tai <i>b) eri toistomäärä</i> tulee erillinen merkintä. Tämä tarkoittaa, että esim. 3x1 toiston etukyykyt vaihtuvilla painoilla raportoidaan näin:
 </p>
-<img src="frontsquatexample.png" style="width: 100%;"/>
+<img src="frontsquatexample.png" />
 <span>WodBoardiin käsin lisäämällä tämän saa merkityksi <i>Front Squat 3x1 @ 83, 85, 88kg</i></span>
 </div>
 
@@ -101,11 +104,16 @@
 <h2>Ohjeet</h2>
 
 <h3>1. Lataa WodConnectista harjoitusdatasi asetuksien kautta (kts. kuva)</h3>
-<img src="downloadexcel.png"  style="width: 100%;" />
+<img src="downloadexcel.png" />
 
 <h3>2. Pudota/lisää kyseinen WodConnectista ladattu tiedosto yllä olevaan <a href="#drop">laatikkoon</a>.</h3>
 
 <h3>3. Siirry <a href="https://www.wodboard.com/import/custom_training_data/new" target="_blank">WodBoardin sivulle</a> syöttämään voimatreenien datat. <b>Sinun täytyy olla kirjautunut WodBoardiin!</b></h3>
+
+<h3>4. Mahdolliset ongelmatilanteet</h3>
+<p>Jotkut liikkeet (kuten <i>Jerk</i>) eivät välttämättä siirry oikein, koska WodBoardista ei löydy liikettä vastaavalla nimellä. Sellaisista liikkeistä tulee ilmoitus (kts. kuva), ja voit lisäillä ne vaikka käsin.</p>
+<p>Esim. näissä <i>Jerk</i> treeneissä on ollut mahdollista tehdä joko <i>Split Jerk</i> tai <i>Push jerk</i>, mutta datasta sitä on vaikea päätellä, niin tämän takia kyseiselle liikkelle ei ole automaattisesti tehty korjauksia.</p>
+<img src="jerk.png" />
 </div>
 
 </div>
