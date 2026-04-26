@@ -37,10 +37,24 @@
     #data {
       max-width: 500px;
     }
+    #lastModified {
+      font-size: small;
+      padding-top: 0px;
+      margin-top: 0px;
+      color: gray;
+    }
     
     @media screen and (max-width: 1000px) {
       body {
         flex-direction: column;
+      }
+      
+      div,p {      
+        font-size: 22px;
+      }
+      
+      #data {
+        max-width: unset;
       }
     }
   </style>
@@ -48,7 +62,9 @@
 <body style="margin: auto; text-align: center;">
 
 <div id="main">
-<h1>WodConnect -voimatreenien siirto WodBoardiin</h1>
+<h1>WodConnect -voimatreenien siirto WodBoardiin
+<p id="lastModified"></p></h1>
+
 
 <div id="drop">
   Raahaa WodConnectista ladattu excel-tiedosto tähän<br>tai klikkaa lisätäksesi tiedosto.<br><br>Tiedoston pitäisi latautua automaattisesti laitteellesi nimellä <b>wodboardiin.csv</b>.
@@ -87,6 +103,11 @@
  </div>
 </div>
 <script>
+
+if(document.lastModified){
+    document.getElementById('lastModified').innerHTML= `Viimeksi päivitetty: ${new Date(document.lastModified).toLocaleString()}. Tarkista muutoshistoria <a href="https://github.com/Hazler/wodconnect2wodboard/commits/main/" target="_blank" style="color: #aaa; font-weight: bold;">täältä</a>`;
+}
+
 const drop = document.getElementById("drop");
 const fileInput = document.getElementById("fileInput");
 
