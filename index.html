@@ -70,6 +70,7 @@
       
       #data {
         max-width: unset;
+        padding: unset;
       }
     }
   </style>
@@ -82,7 +83,9 @@
 
 
 <div id="drop">
-  Raahaa WodConnectista ladattu excel-tiedosto tähän<br>tai klikkaa lisätäksesi tiedosto.<br><br>Tiedoston pitäisi latautua automaattisesti laitteellesi nimellä <b>wodboardiin.csv</b>.
+  <h3>Raahaa WodConnectista excel-muodossa ladattu treenihistoria tähän<br>tai klikkaa tästä lisätäksesi tiedosto laitteeltasi.</h3>
+  <p>Tämän jälkeen kyseisestä tiedostosta poimitaan voimatreenit ja ne tallennetaan uudessa muodossa WodBoardiin siirrettävään tiedostoon sekä esitetään tällä sivulla.</p>
+  <p>Tiedoston pitäisi latautua automaattisesti laitteellesi nimellä <b>wodboardiin.csv</b>.</p>
 </div>
 
 <div style="margin: 10px;">Muutettuasi WodConnectin treenit WodBoardiin sopivaan muotoon, <a href="https://www.wodboard.com/import/custom_training_data/new" target="_blank">siirry tästä WodBoardiin syöttämään tiedot</a>.</div>
@@ -92,11 +95,10 @@
 
 <div>
 <h3>HUOM!</h3>
+<p>Työkalun käyttäminen omalla vastuulla. Allekirjoittanut on kuitenkin itse käyttänyt tätä, joten ihan hyväksi tämä on todettu.</p>
 <p>WodConnectista haetusta datasta poimitaan sellaiset voimatreenit, mitkä on helposti parsittavissa. Monimutkaisia yhdistelmätreenejä ei tuoda (esim. <i>3-point-snatch</i>, tai <i>Liike + toinen liike</i>).</p>
-<p>Jokaisesta setistä, jossa on joko <i>a) eri paino</i> tai <i>b) eri toistomäärä</i> tulee erillinen merkintä. Tämä tarkoittaa, että esim. 3x1 toiston etukyykyt vaihtuvilla painoilla raportoidaan näin:
-</p>
-<img src="frontsquatexample.png" />
-<span>WodBoardiin käsin lisäämällä tämän saa merkityksi <i>Front Squat 3x1 @ 83, 85, 88kg</i></span>
+<p>Eri toistomäärillä olevat sarjat pilkotaan omiksi riveikseen, ja WodBoardiin merkitään tulokseksi raskaimmalla painolla tehtyjen sarjojen määrät. Lisäksi koko sarja on mukana kommentissa, jotta nekin tiedot säilyvät. Alla olevassa kuvassa esimerkki:</p>
+<img src="example.png" />
 </div>
 
 
@@ -104,6 +106,7 @@
 <h2>Ohjeet</h2>
 
 <h3>1. Lataa WodConnectista harjoitusdatasi asetuksien kautta (kts. kuva)</h3>
+<h4><b>HOX!</b> Jos yrität ladata tiedostoa WodConnect -appiksella Androidilla eikä se onnistu, niin kokeile selaimen kautta!</h4>
 <img src="downloadexcel.png" />
 
 <h3>2. Pudota/lisää kyseinen WodConnectista ladattu tiedosto yllä olevaan <a href="#drop">laatikkoon</a>.</h3>
@@ -114,6 +117,9 @@
 <p>Jotkut liikkeet (kuten <i>Jerk</i>) eivät välttämättä siirry oikein, koska WodBoardista ei löydy liikettä vastaavalla nimellä. Sellaisista liikkeistä tulee ilmoitus (kts. kuva), ja voit lisäillä ne vaikka käsin.</p>
 <p>Esim. näissä <i>Jerk</i> treeneissä on ollut mahdollista tehdä joko <i>Split Jerk</i> tai <i>Push jerk</i>, mutta datasta sitä on vaikea päätellä, niin tämän takia kyseiselle liikkelle ei ole automaattisesti tehty korjauksia.</p>
 <img src="jerk.png" />
+
+<h3>5. ÄLÄ LISÄÄ TIETOJA WODBOARDIIN USEAAN KERTAAN!</h3>
+<p>Tällöin treenidata ilmestyy wodboardiin joka kerta uudelleen, jolloin siellä on melkoinen lista samoja tuloksia samoille päiville.</p>
 </div>
 
 </div>
@@ -191,8 +197,6 @@ function transformJournalToCSV(journalRows) {
 
   journalRows.forEach(row => {
     if (row["workout_type"] !== "Strength") return;
-    
-    //console.log(row);
 
     const date = formatDate(row["happened_at"]);
     let comment = "[wodconnect]";//row["Comment"] || "";
@@ -204,8 +208,7 @@ function transformJournalToCSV(journalRows) {
       return; // ei näitä
       
     if (desc.includes("+"))
-      return; // ei näitä yhdistelmiä
-    
+      return; // ei näitä yhdistelmiä    
     
     const matchName = desc.match(/^(.+?)\s+\d/);
     let name = matchName ? matchName[1] : desc.split('\n')[0];
@@ -215,32 +218,23 @@ function transformJournalToCSV(journalRows) {
       
       if (name == "(Squat) Snatch") {
         name = "Snatch";
-        comment = "(Squat) Snatch [wodconnect]";
       }
       if (name.startsWith("Find"))
         name = name.substring(5);
       if (name == "Pause cluster") {
         name = "Cluster";
-        comment = "Pause cluster [wodconnect]";
       }
       if (name == "Pause front squat") {
         name = "Front squat";
-        comment = "Pause front squat [wodconnect]";
       }
       if (name == "Pause Back squat") {
         name = "Back squat";
-        comment = "Pause back squat [wodconnect]";
-      }
-      if (name == "Jerk") {
-        comment = "Jerk [wodconnect]";
       }
       if (name == "Slow pull Power snatch") {
         name = "Power snatch";
-        comment = "Slow pull power snatch [wodconnect]";
       }
       if (name == "Strict press behind the neck") {
         name = "Strict press";
-        comment = "Strict press behind the neck [wodconnect]";
       }
       
     let bracket = name.indexOf('(');
@@ -302,32 +296,51 @@ function transformJournalToCSV(journalRows) {
     //console.log(weights);
 
     let weightIndex = 0;
+    let topWeightIndex = 0;
+    let topWeight = 0;
+    let topWeightSets = 0;
+    let topWeightReps = 0;
+    
 
-    // scheme per row
+    // add all schemes and weights to the comment, set only the series for the highest weight as actual data to import
     schemes.forEach(({ sets, reps }) => {
       const blockWeights = weights.slice(weightIndex, weightIndex + sets);
-      weightIndex += sets;
- 
-      // Group by weight
-      const grouped = {};
-      blockWeights.forEach(w => {
-        grouped[w] = (grouped[w] || 0) + 1;
+      
+      if (blockWeights.length == 0)
+        return;
+      
+      let commentStr = '';
+        commentStr += `${sets}x${reps} @ ${blockWeights.join('-')}kg`;
+      
+      for (let i = 0;i<blockWeights.length;i++) {
+      
+        if (blockWeights[i] > topWeight) {
+          topWeight = blockWeights[i];
+          topWeightIndex = i;
+          topWeightSets = 1;
+          topWeightReps = reps;
+        }
+        else if (blockWeights[i] == topWeight) {
+          if (topWeightReps == reps)
+            topWeightSets++;
+        }
+      }
+      
+      weightIndex += sets;      
+      
+      output.push({
+        Date: date,
+        Type: "Movement",
+        Name: name,
+        Sets: topWeightSets,
+        Reps: topWeightReps,
+        Weight: topWeight,
+        Time: "",
+        "Workout Rounds": "",
+        "Workout Reps": "",
+        Comment: commentStr
       });
  
-      Object.entries(grouped).forEach(([weight, count]) => {
-        output.push({
-          Date: date,
-          Type: "Movement",
-          Name: name,
-          Sets: count,
-          Reps: reps,
-          Weight: weight,
-          Time: "",
-          "Workout Rounds": "",
-          "Workout Reps": "",
-          Comment: comment
-        });
-      });
     });
   });
 
@@ -353,18 +366,6 @@ function downloadCSV(data, filename = "wodboardiin.csv") {
   a.click();
 }
 
-function getCorrectName(data, index) {
-  if (data?.Name.toLowerCase() == "jerk") {
-    return `<select id="jerk${index}">
-      <option value="Split jerk">Split jerk</option>
-      <option value="Push jerk">Push jerk</option>    
-    </select>`;
-  }
-
-  return data?.Name;
-}
-
-
 function createResults(transformed) {
 
   let dataRows = transformed.map((t, i) => {
@@ -374,19 +375,14 @@ function createResults(transformed) {
         <td>${t.Sets}</td>
         <td>${t.Reps}</td>
         <td>${t.Weight}</td>
+      </tr>
+      <tr>      
+        <td colspan="5" style="text-align: right;"><i>${t.Comment}</i></td>
       </tr>`;
     }).join("\n");
-  
-let infoTemplate = "";  
-//if (transformed.some(t => t.Name.toLowerCase() == "jerk")) {
-//  infoTemplate = `<div id="movement-info" style="margin-bottom: 10px;">
-//  Listasta löytyi "Jerk", mutta WodBoardista ei löydy liikettä vastaavalla nimellä, vaan sen on oltava joko "Push jerk" tai "Split jerk". Voit valita rivikohtaisesti kumpaa haluat käyttää, tai vaihtoehtoisesti olla koskematta näihin riveihin. WodBoard ilmoittaa, mikäli jotain liikkeitä ei saada vietyä järjestelmään.
-//  </div>`;
-//}
 
  const template = 
  `
- ${infoTemplate}
  <table style="margin: auto; text-align: left;">
    <tr>
      <th style="min-width: 150px;">Date</th>
@@ -406,12 +402,9 @@ let infoTemplate = "";
 
 // --- FILE HANDLER ---
 async function handleFile(file) {
-  console.log("Processing file...");
 
   const data = await file.arrayBuffer();
   const workbook = XLSX.read(data);
-  
-  //console.log(workbook);
 
   const sheet = workbook.Sheets[workbook.SheetNames[0]];
   const rows = XLSX.utils.sheet_to_json(sheet, {
@@ -428,7 +421,6 @@ async function handleFile(file) {
 });
 
   const transformed = transformJournalToCSV(rows);
-  //console.log("Transformed:", transformed);
   
   createResults(transformed);
   downloadCSV(transformed);
