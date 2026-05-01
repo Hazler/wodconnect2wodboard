@@ -254,6 +254,19 @@
           if (name.startsWith("Lämmittely"))
             return; // ei näitä
 
+          if (name.endsWith("(Every"))
+            name = name.replace("(Every", "");
+
+          let bracket = name.indexOf('(');
+          let endBracket = name.indexOf(')');
+          if (bracket > 0) {
+            let newName = name.substring(0, bracket).trimEnd();
+            if (endBracket > bracket) {
+              newName += name.substring(endBracket + 1);
+            }
+            name = newName;
+          }
+
           let nameLower = name.toLowerCase().trim();
           if (nameLower.startsWith("1rm for"))
             name = name.substring("1rm for ".length);
@@ -263,8 +276,6 @@
             name = name.substring(5);
           if (name.endsWith(" - Every"))
             name = name.replace(" - Every", "");
-          if (name.endsWith("(Every"))
-            name = name.replace("(Every", "");
           if (name.endsWith(" - hidas"))
             name = name.replace(" - hidas", "");
           if (name.startsWith("No hook, no contact"))
@@ -273,8 +284,11 @@
             name = name.replace("from split", "");
           if (name.startsWith("No feet"))
             name = name.replace("No feet", "");
+          if (name.startsWith("Build to") && name.endsWith("Heavy"))
+            name = name.replace("Build to", "").replace("Heavy", "");
 
           nameLower = name.toLowerCase().trim();
+
           switch (nameLower) {
             case "snatch deadlift": "snatch grip deadlift"; break;
             case "(squat) snatch": name = "Snatch"; break;
@@ -288,16 +302,9 @@
             case "weighted pullup": name = "Strict pull-up"; break;
           }
 
-          let bracket = name.indexOf('(');
-          let endBracket = name.indexOf(')');
-          if (bracket > 0) {
-            let newName = name.substring(0, bracket).trimEnd();
-            if (endBracket > bracket) {
-              newName += name.substring(endBracket + 1);
-            }
-            name = newName;
+          if (name.includes("Pause")) {
+            console.log('asd');
           }
-
           // Parse schemes (e.g. 1x3+7x2)
           let schemeRegex = /(\d+x\d+)/g;
           let match = desc.match(schemeRegex);
