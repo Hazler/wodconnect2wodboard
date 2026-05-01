@@ -251,19 +251,30 @@
           while (name.includes("*"))
             name = name.replace("*", "")
 
-          let nameLower = name.toLowerCase();
+          if (name.startsWith("Lämmittely"))
+            return; // ei näitä
 
-          if (name.toLowerCase().startsWith("1rm for"))
+          let nameLower = name.toLowerCase().trim();
+          if (nameLower.startsWith("1rm for"))
             name = name.substring("1rm for ".length);
-          if (name.includes("-2s pause vastaanotossa"))
+          if (nameLower.includes("-2s pause vastaanotossa"))
             name = name.replace("-2s pause vastaanotossa", "");
-          if (name.startsWith("find"))
+          if (nameLower.startsWith("find"))
             name = name.substring(5);
           if (name.endsWith(" - Every"))
             name = name.replace(" - Every", "");
           if (name.endsWith("(Every"))
             name = name.replace("(Every", "");
+          if (name.endsWith(" - hidas"))
+            name = name.replace(" - hidas", "");
+          if (name.startsWith("No hook, no contact"))
+            name = name.replace("No hook, no contact", "");
+          if (name.endsWith("from split"))
+            name = name.replace("from split", "");
+          if (name.startsWith("No feet"))
+            name = name.replace("No feet", "");
 
+          nameLower = name.toLowerCase().trim();
           switch (nameLower) {
             case "snatch deadlift": "snatch grip deadlift"; break;
             case "(squat) snatch": name = "Snatch"; break;
