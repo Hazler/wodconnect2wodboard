@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <title>WodConnect2WodBoard</title>
@@ -17,68 +16,58 @@
       flex-direction: row;
       justify-content: center;
     }
-
     #drop {
       border: 2px dashed #888;
       padding: 50px;
       border-radius: 10px;
       cursor: pointer;
     }
-
     #drop.hover {
       border-color: #0f0;
     }
-
     div {
       background-color: #222;
       border-radius: 5px;
       padding: 20px 60px;
       margin: 10px;
     }
-
     #main {
-      max-width: 1000px;
+      max-width:1000px; 
     }
-
     #data {
       max-width: 500px;
     }
-
     #lastModified {
       font-size: small;
       padding-top: 0px;
       margin-top: 0px;
       color: #aaa;
     }
-
     a {
       color: gray;
       font-weight: bold;
     }
-
     img {
       width: 100%;
     }
-
+    
     @media screen and (max-width: 1000px) {
       body {
         flex-direction: column;
       }
-
+      
       h1 {
         font-size: 50px;
       }
-
-      div,
-      p {
+      
+      div,p {      
         font-size: 30px;
       }
-
-      #lastModified,
-      span {
+      
+      #lastModified,span {
         font-size: 20px;
       }
-
+      
       #data {
         max-width: unset;
         padding: unset;
@@ -86,357 +75,308 @@
     }
   </style>
 </head>
-
 <body style="margin: auto; text-align: center;">
 
-  <div id="main">
-    <h1>WodConnect -voimatreenien siirto WodBoardiin
-      <p id="lastModified"></p>
-    </h1>
+<div id="main">
+<h1>WodConnect -voimatreenien siirto WodBoardiin
+<p id="lastModified"></p></h1>
 
 
-    <div id="drop">
-      <h3>Raahaa WodConnectista excel-muodossa ladattu treenihistoria tähän<br>tai klikkaa tästä lisätäksesi tiedosto
-        laitteeltasi.</h3>
-      <p>Tämän jälkeen kyseisestä tiedostosta poimitaan voimatreenit ja ne tallennetaan uudessa muodossa WodBoardiin
-        siirrettävään tiedostoon sekä esitetään tällä sivulla.</p>
-      <p>Tiedoston pitäisi latautua automaattisesti laitteellesi nimellä <b>wodboardiin.csv</b>.</p>
-    </div>
+<div id="drop">
+  <h3>Raahaa WodConnectista excel-muodossa ladattu treenihistoria tähän<br>tai klikkaa tästä lisätäksesi tiedosto laitteeltasi.</h3>
+  <p>Tämän jälkeen kyseisestä tiedostosta poimitaan voimatreenit ja ne tallennetaan uudessa muodossa WodBoardiin siirrettävään tiedostoon sekä esitetään tällä sivulla.</p>
+  <p>Tiedoston pitäisi latautua automaattisesti laitteellesi nimellä <b>wodboardiin.csv</b>.</p>
+</div>
 
-    <div style="margin: 10px;">Muutettuasi WodConnectin treenit WodBoardiin sopivaan muotoon, <a
-        href="https://www.wodboard.com/import/custom_training_data/new" target="_blank">siirry tästä WodBoardiin
-        syöttämään tiedot</a>.</div>
+<div style="margin: 10px;">Muutettuasi WodConnectin treenit WodBoardiin sopivaan muotoon, <a href="https://www.wodboard.com/import/custom_training_data/new" target="_blank">siirry tästä WodBoardiin syöttämään tiedot</a>.</div>
 
-    <input type="file" id="fileInput" hidden />
+<input type="file" id="fileInput" hidden />
 
 
-    <div>
-      <h3>HUOM!</h3>
-      <p>Työkalun käyttäminen omalla vastuulla. Allekirjoittanut on kuitenkin itse käyttänyt tätä, joten ihan hyväksi
-        tämä on todettu.</p>
-      <p>WodConnectista haetusta datasta poimitaan sellaiset voimatreenit, mitkä on helposti parsittavissa.
-        Monimutkaisia yhdistelmätreenejä ei tuoda (esim. <i>3-point-snatch</i>, tai <i>Liike + toinen liike</i>).</p>
-      <p>Eri toistomäärillä olevat sarjat pilkotaan omiksi riveikseen, ja WodBoardiin merkitään tulokseksi raskaimmalla
-        painolla tehtyjen sarjojen määrät. Lisäksi koko sarja on mukana kommentissa, jotta nekin tiedot säilyvät. Alla
-        olevassa kuvassa esimerkki:</p>
-      <img src="example.png" />
-    </div>
+<div>
+<h3>HUOM!</h3>
+<p>Työkalun käyttäminen omalla vastuulla. Allekirjoittanut on kuitenkin itse käyttänyt tätä, joten ihan hyväksi tämä on todettu.</p>
+<p>WodConnectista haetusta datasta poimitaan sellaiset voimatreenit, mitkä on helposti parsittavissa. Monimutkaisia yhdistelmätreenejä ei tuoda (esim. <i>3-point-snatch</i>, tai <i>Liike + toinen liike</i>).</p>
+<p>Eri toistomäärillä olevat sarjat pilkotaan omiksi riveikseen, ja WodBoardiin merkitään tulokseksi raskaimmalla painolla tehtyjen sarjojen määrät. Lisäksi koko sarja on mukana kommentissa, jotta nekin tiedot säilyvät. Alla olevassa kuvassa esimerkki:</p>
+<img src="example.png" />
+</div>
 
 
-    <div>
-      <h2>Ohjeet</h2>
+<div>
+<h2>Ohjeet</h2>
 
-      <h3>1. Lataa WodConnectista harjoitusdatasi asetuksien kautta (kts. kuva)</h3>
-      <h4><b>HOX!</b> Jos yrität ladata tiedostoa WodConnect -appiksella Androidilla eikä se onnistu, niin kokeile
-        selaimen kautta!</h4>
-      <img src="downloadexcel.png" />
+<h3>1. Lataa WodConnectista harjoitusdatasi asetuksien kautta (kts. kuva)</h3>
+<h4><b>HOX!</b> Jos yrität ladata tiedostoa WodConnect -appiksella Androidilla eikä se onnistu, niin kokeile selaimen kautta!</h4>
+<img src="downloadexcel.png" />
 
-      <h3>2. Pudota/lisää kyseinen WodConnectista ladattu tiedosto yllä olevaan <a href="#drop">laatikkoon</a>.</h3>
+<h3>2. Pudota/lisää kyseinen WodConnectista ladattu tiedosto yllä olevaan <a href="#drop">laatikkoon</a>.</h3>
 
-      <h3>3. Siirry <a href="https://www.wodboard.com/import/custom_training_data/new" target="_blank">WodBoardin
-          sivulle</a> syöttämään voimatreenien datat. <b>Sinun täytyy olla kirjautunut WodBoardiin!</b></h3>
+<h3>3. Siirry <a href="https://www.wodboard.com/import/custom_training_data/new" target="_blank">WodBoardin sivulle</a> syöttämään voimatreenien datat. <b>Sinun täytyy olla kirjautunut WodBoardiin!</b></h3>
 
-      <h3>4. Mahdolliset ongelmatilanteet</h3>
-      <p>Jotkut liikkeet (kuten <i>Jerk</i>) eivät välttämättä siirry oikein, koska WodBoardista ei löydy liikettä
-        vastaavalla nimellä. Sellaisista liikkeistä tulee ilmoitus (kts. kuva), ja voit lisäillä ne vaikka käsin.</p>
-      <p>Esim. näissä <i>Jerk</i> treeneissä on ollut mahdollista tehdä joko <i>Split Jerk</i> tai <i>Push jerk</i>,
-        mutta datasta sitä on vaikea päätellä, niin tämän takia kyseiselle liikkelle ei ole automaattisesti tehty
-        korjauksia.</p>
-      <img src="jerk.png" />
+<h3>4. Mahdolliset ongelmatilanteet</h3>
+<p>Jotkut liikkeet (kuten <i>Jerk</i>) eivät välttämättä siirry oikein, koska WodBoardista ei löydy liikettä vastaavalla nimellä. Sellaisista liikkeistä tulee ilmoitus (kts. kuva), ja voit lisäillä ne vaikka käsin.</p>
+<p>Esim. näissä <i>Jerk</i> treeneissä on ollut mahdollista tehdä joko <i>Split Jerk</i> tai <i>Push jerk</i>, mutta datasta sitä on vaikea päätellä, niin tämän takia kyseiselle liikkelle ei ole automaattisesti tehty korjauksia.</p>
+<img src="jerk.png" />
 
-      <h3>5. ÄLÄ LISÄÄ TIETOJA WODBOARDIIN USEAAN KERTAAN!</h3>
-      <p>Tällöin treenidata ilmestyy wodboardiin joka kerta uudelleen, jolloin siellä on melkoinen lista samoja tuloksia
-        samoille päiville.</p>
-    </div>
+<h3>5. ÄLÄ LISÄÄ TIETOJA WODBOARDIIN USEAAN KERTAAN!</h3>
+<p>Tällöin treenidata ilmestyy wodboardiin joka kerta uudelleen, jolloin siellä on melkoinen lista samoja tuloksia samoille päiville.</p>
+</div>
 
-  </div>
-  <div id="output">
-    <h2>Treenien muutoksen tulokset</h2>
-    <div id="data" style="text-align: center;">
-      Tähän tulee näkyviin ne tiedot, mitä WodBoardiin vietävään tiedostoon päätyy.
-    </div>
-  </div>
-  <script>
+</div>
+<div id="output">
+ <h2>Treenien muutoksen tulokset</h2>
+ <div id="data" style="text-align: center;">
+  Tähän tulee näkyviin ne tiedot, mitä WodBoardiin vietävään tiedostoon päätyy.
+ </div>
+</div>
+<script>
 
-    if (document.lastModified) {
-      document.getElementById('lastModified').innerHTML = `Viimeksi päivitetty: ${new Date(document.lastModified).toLocaleString()}. Tarkista muutoshistoria <a href="https://github.com/Hazler/wodconnect2wodboard/commits/main/" target="_blank" style="font-weight: bold;">täältä</a>`;
+if(document.lastModified){
+    document.getElementById('lastModified').innerHTML= `Viimeksi päivitetty: ${new Date(document.lastModified).toLocaleString()}. Tarkista muutoshistoria <a href="https://github.com/Hazler/wodconnect2wodboard/commits/main/" target="_blank" style="font-weight: bold;">täältä</a>`;
+}
+
+const drop = document.getElementById("drop");
+const fileInput = document.getElementById("fileInput");
+
+// --- CRITICAL FIX: prevent default everywhere ---
+["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+  drop.addEventListener(eventName, e => {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+});
+
+// Visual feedback
+drop.addEventListener("dragover", () => drop.classList.add("hover"));
+drop.addEventListener("dragleave", () => drop.classList.remove("hover"));
+drop.addEventListener("drop", e => {
+  drop.classList.remove("hover");
+
+  const file = e.dataTransfer.files[0];
+  console.log("Dropped file:", file); // DEBUG
+
+  if (!file) {
+    alert("No file detected");
+    return;
+  }
+
+  handleFile(file);
+});
+
+// Click fallback
+drop.onclick = () => fileInput.click();
+fileInput.addEventListener("change", e => {
+  handleFile(e.target.files[0]);
+});
+
+function formatDate(value) {
+  if (!value) return "";
+
+  // Case 1: already a Date object
+  if (value instanceof Date) {
+    return value.toISOString().split("T")[0];
+  }
+
+  // Case 2: Excel serial number
+  if (typeof value === "number") {
+    const excelEpoch = new Date(Date.UTC(1899, 11, 30));
+    const date = new Date(excelEpoch.getTime() + value * 86400000);
+    return date.toISOString().split("T")[0];
+  }
+
+  // Case 3: string
+  if (typeof value === "string") {
+    return value.split(" ")[0];
+  }
+
+  return "";
+}
+
+function transformJournalToCSV(journalRows) {
+  const output = [];
+
+  journalRows.forEach(row => {
+    if (row["workout_type"] !== "Strength") return;
+
+    const date = formatDate(row["happened_at"]);
+
+    // Parse description
+    const desc = row["workout_description"];
+    
+    if (desc.includes("3-position"))
+      return; // ei näitä
+      
+    if (desc.includes("+"))
+      return; // ei näitä yhdistelmiä    
+    
+    const matchName = desc.match(/^(.+?)\s+\d/);
+    let name = matchName ? matchName[1] : desc.split('\n')[0];
+    
+    while (name.includes("*"))
+      name = name.replace("*", "")
+      
+      if (name == "(Squat) Snatch") {
+        name = "Snatch";
+      }
+      if (name.startsWith("Find"))
+        name = name.substring(5);
+      if (name == "Pause cluster") {
+        name = "Cluster";
+      }
+      if (name == "Pause front squat") {
+        name = "Front squat";
+      }
+      if (name == "Pause Back squat") {
+        name = "Back squat";
+      }
+      if (name == "Slow pull Power snatch") {
+        name = "Power snatch";
+      }
+      if (name == "Strict press behind the neck") {
+        name = "Strict press";
+      }
+      
+    let bracket = name.indexOf('(');
+    let endBracket = name.indexOf(')');
+    if (bracket > 0) {
+      let newName = name.substring(0, bracket).trimEnd();
+      if (endBracket > bracket) {
+        newName += name.substring(endBracket+1);
+      }
+      name = newName;
     }
 
-    const drop = document.getElementById("drop");
-    const fileInput = document.getElementById("fileInput");
+    // Parse schemes (e.g. 1x3+7x2)
+    let schemeRegex = /(\d+\s?x\s?\d+)/g;
+    let match = desc.match(schemeRegex);
+    let schemes = null;
 
-    // --- CRITICAL FIX: prevent default everywhere ---
-    ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
-      drop.addEventListener(eventName, e => {
-        e.preventDefault();
-        e.stopPropagation();
-      });
-    });
-
-    // Visual feedback
-    drop.addEventListener("dragover", () => drop.classList.add("hover"));
-    drop.addEventListener("dragleave", () => drop.classList.remove("hover"));
-    drop.addEventListener("drop", e => {
-      drop.classList.remove("hover");
-
-      const file = e.dataTransfer.files[0];
-      console.log("Dropped file:", file); // DEBUG
-
-      if (!file) {
-        alert("No file detected");
-        return;
-      }
-
-      handleFile(file);
-    });
-
-    // Click fallback
-    drop.onclick = () => fileInput.click();
-    fileInput.addEventListener("change", e => {
-      handleFile(e.target.files[0]);
-    });
-
-    function formatDate(value) {
-      if (!value) return "";
-
-      // Case 1: already a Date object
-      if (value instanceof Date) {
-        return value.toISOString().split("T")[0];
-      }
-
-      // Case 2: Excel serial number
-      if (typeof value === "number") {
-        const excelEpoch = new Date(Date.UTC(1899, 11, 30));
-        const date = new Date(excelEpoch.getTime() + value * 86400000);
-        return date.toISOString().split("T")[0];
-      }
-
-      // Case 3: string
-      if (typeof value === "string") {
-        return value.split(" ")[0];
-      }
-
-      return "";
-    }
-
-    function transformJournalToCSV(journalRows) {
-      try {
-        const output = [];
-
-        journalRows.forEach(row => {
-          if (row["workout_type"] !== "Strength") return;
-
-          const date = formatDate(row["happened_at"]);
-          let comment = "[wodconnect]";//row["Comment"] || "";
-
-          // Parse description
-          let desc = row["workout_description"];
-
-          if (desc.includes("3-position"))
-            return; // ei näitä
-
-          if (desc.includes("+"))
-            return; // ei näitä yhdistelmiä
-
-          if (desc.startsWith("In 15min window\n")) {
-            desc = desc.replace("In 15min window\n", "")
-          }
-
-          const matchName = desc.match(/^(.+?)\s+\d/);
-          let name = matchName ? matchName[1] : desc.split('\n')[0];
-
-          if (name.includes("@"))
-            return; // ei näitä
-
-          while (name.includes("*"))
-            name = name.replace("*", "")
-
-          if (name.startsWith("Lämmittely"))
-            return; // ei näitä
-
-          if (name.endsWith("(Every"))
-            name = name.replace("(Every", "");
-
-          let bracket = name.indexOf('(');
-          let endBracket = name.indexOf(')');
-          if (bracket > 0) {
-            let newName = name.substring(0, bracket).trimEnd();
-            if (endBracket > bracket) {
-              newName += name.substring(endBracket + 1);
-            }
-            name = newName;
-          }
-
-          let nameLower = name.toLowerCase().trim();
-          if (nameLower.startsWith("1rm for"))
-            name = name.substring("1rm for ".length);
-          if (nameLower.includes("-2s pause vastaanotossa"))
-            name = name.replace("-2s pause vastaanotossa", "");
-          if (nameLower.startsWith("find"))
-            name = name.substring(5);
-          if (name.endsWith(" - Every"))
-            name = name.replace(" - Every", "");
-          if (name.endsWith(" - hidas"))
-            name = name.replace(" - hidas", "");
-          if (name.startsWith("No hook, no contact"))
-            name = name.replace("No hook, no contact", "");
-          if (name.endsWith("from split"))
-            name = name.replace("from split", "");
-          if (name.startsWith("No feet"))
-            name = name.replace("No feet", "");
-          if (name.startsWith("Build to") && name.endsWith("Heavy"))
-            name = name.replace("Build to", "").replace("Heavy", "");
-
-          nameLower = name.toLowerCase().trim();
-
-          switch (nameLower) {
-            case "snatch deadlift": "snatch grip deadlift"; break;
-            case "(squat) snatch": name = "Snatch"; break;
-            case "(squat) clean": name = "Clean"; break;
-            case "pause cluster": name = "Cluster"; break;
-            case "pause front squat": name = "Front squat"; break;
-            case "pause back squat": name = "Back squat"; break;
-            case "pause snatch": name = "Snatch"; break;
-            case "slow pull power snatch": name = "Power snatch"; break;
-            case "strict press behind the neck": name = "Strict press"; break;
-            case "weighted pullup": name = "Strict pull-up"; break;
-          }
-
-          if (name.includes("Pause")) {
-            console.log('asd');
-          }
-          // Parse schemes (e.g. 1x3+7x2)
-          let schemeRegex = /(\d+x\d+)/g;
-          let match = desc.match(schemeRegex);
-          let schemes = null;
-
-          if (match)
-            schemes = match.map(s => {
-              const [sets, reps] = s.split("x").map(Number);
-              return { sets, reps };
-            });
-          else if (desc.includes("single") || desc.includes("1RM"))
-            schemes = [{ sets: 1, reps: 1 }];
-          else if (desc.includes("Build to heavy")
-            || desc.includes("Build to a heavy")
-            || desc.includes("Build to heavy but pretty")
-            || desc.includes("Heavy")
-            || desc.includes("to build a heavy")) {
-
-            let rows = desc.split('\n');
-            if (rows.length < 2)
-              return;
-
-            let split = rows[1].split(' ').map(s => s.toLowerCase());
-            let digit = split[(split.indexOf('pretty') >= 0 ? split.indexOf('pretty') : split.indexOf('heavy')) + 1];
-            let number = Number.parseInt(digit);
-            if (!Number.isNaN(number))
-              schemes = [{ sets: 1, reps: number }];
-            else {
-              switch (digit.replace(',', '')) {
-                case "double": schemes = [{ sets: 1, reps: 2 }]; break;
-                case "triple": schemes = [{ sets: 1, reps: 3 }]; break;
-                default:
-                  console.log("Name", name);
-                  console.log('DIGIT', digit);
-                  break;
-              }
-            }
-          }
-
-          if (!schemes) {
-            console.log("Failed to parse", desc);
-            return;
-          }
-
-          // Parse weights
-          const weights = row["result"]
-            .split(/[,| ]+/)
-            .map(w => Number(w))
-            .filter(w => !isNaN(w));
-
-          //console.log(weights);
-
-          let weightIndex = 0;
-          let topWeightIndex = 0;
-          let topWeight = 0;
-          let topWeightSets = 0;
-          let topWeightReps = 0;
-
-
-          // add all schemes and weights to the comment, set only the series for the highest weight as actual data to import
-          schemes.forEach(({ sets, reps }) => {
-            const blockWeights = weights.slice(weightIndex, weightIndex + sets);
-
-            if (blockWeights.length == 0)
-              return;
-
-            let commentStr = '';
-            commentStr += `${sets}x${reps} @ ${blockWeights.join('-')}kg`;
-
-            for (let i = 0; i < blockWeights.length; i++) {
-
-              if (blockWeights[i] > topWeight) {
-                topWeight = blockWeights[i];
-                topWeightIndex = i;
-                topWeightSets = 1;
-                topWeightReps = reps;
-              }
-              else if (blockWeights[i] == topWeight) {
-                if (topWeightReps == reps)
-                  topWeightSets++;
-              }
-            }
-
-            weightIndex += sets;
-
-            output.push({
-              Date: date,
-              Type: "Movement",
-              Name: name,
-              Sets: topWeightSets,
-              Reps: topWeightReps,
-              Weight: topWeight,
-              Time: "",
-              "Workout Rounds": "",
-              "Workout Reps": "",
-              Comment: commentStr
-            });
-
-          });
+    if (match)
+      schemes = match.map(s => {
+          const [sets, reps] = s.split("x").map(Number);
+          return { sets, reps };
         });
-
-        return output;
+    else if (desc.includes("single") || desc.includes("1RM"))
+      schemes = [{ sets: 1, reps: 1 }];
+    else if (desc.includes("Build to heavy") 
+          || desc.includes("Build to a heavy")
+          || desc.includes("Build to heavy but pretty")
+          || desc.includes("Heavy")
+          || desc.includes("to build a heavy")) {
+     
+      let split = desc.split('\n')[1].split(' ').map(s => s.toLowerCase());
+      let digit = split[(split.indexOf('pretty') >= 0 ? split.indexOf('pretty') : split.indexOf('heavy')) + 1];
+      
+      if (!digit) {
+        return; // ei onnistu
       }
-      catch (e) {
-        alert('Tietojen parsiminen epäonnistui :( Ilmoitatko Ollille, niin asia voidaan ehkä korjata!');
+        
+      let number = Number.parseInt(digit);
+      if (!Number.isNaN(number))
+        schemes = [{sets: 1, reps: number}];
+      else {      
+        switch (digit.replace(',', '')) {
+          case "double": schemes = [{sets:1, reps: 2}]; break;
+          case "triple": schemes = [{sets:1, reps: 3}]; break;
+          default: 
+            console.log("Name", name);
+            console.log('DIGIT', digit); 
+            break;
+        }
       }
-      return null;
+    }
+    
+    if (!schemes) {
+      console.log("Failed to parse", desc);
+      return;
     }
 
-    function downloadCSV(data, filename = "wodboardiin.csv") {
-      const headers = Object.keys(data[0]);
+    // Parse weights
+    const weights = row["result"]
+      .split(/[,| ]+/)
+      .map(w => Number(w))
+      .filter(w => !isNaN(w));
+      
+    //console.log(weights);
 
-      const csv = [
-        headers.join(","),
-        ...data.map(row =>
-          headers.map(h => `${row[h] ?? ""}`).join(",")
-        )
-      ].join("\n");
+    let weightIndex = 0;
+    let topWeightIndex = 0;
+    let topWeight = 0;
+    let topWeightSets = 0;
+    let topWeightReps = 0;
+    
 
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-      const url = URL.createObjectURL(blob);
+    // add all schemes and weights to the comment, set only the series for the highest weight as actual data to import
+    schemes.forEach(({ sets, reps }) => {    
+      const blockWeights = weights.slice(weightIndex, weightIndex + sets);
+      
+      if (blockWeights.length == 0)
+        return;
+      
+      let commentStr = '';
+        commentStr += `${sets}x${reps} @ ${blockWeights.join('-')}kg`;
+      
+      for (let i = 0;i<blockWeights.length;i++) {
+      
+        if (blockWeights[i] > topWeight) {
+          topWeight = blockWeights[i];
+          topWeightIndex = i;
+          topWeightSets = 1;
+          topWeightReps = reps;
+        }
+        else if (blockWeights[i] == topWeight) {
+          if (topWeightReps == reps)
+            topWeightSets++;
+        }
+      }
+      
+      if (topWeight == 0)
+        return;
+      
+      weightIndex += sets;      
+      
+      output.push({
+        Date: date,
+        Type: "Movement",
+        Name: name,
+        Sets: topWeightSets,
+        Reps: topWeightReps,
+        Weight: topWeight,
+        Time: "",
+        "Workout Rounds": "",
+        "Workout Reps": "",
+        Comment: commentStr
+      });
+ 
+    });
+  });
 
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = filename;
-      a.click();
-    }
+  return output;
+}
 
-    function createResults(transformed) {
+function downloadCSV(data, filename = "wodboardiin.csv") {
+  const headers = Object.keys(data[0]);
+  
+  const csv = [
+    headers.join(","),
+    ...data.map(row =>
+      headers.map(h => `${row[h] ?? ""}`).join(",")
+    )
+  ].join("\n");
 
-      let dataRows = transformed.map((t, i) => {
-        return `<tr>
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+}
+
+function createResults(transformed) {
+
+  let dataRows = transformed.map((t, i) => {
+    return `<tr>
         <td>${t.Date}</td>
         <td>${t.Name}</td>
         <td>${t.Sets}</td>
@@ -446,10 +386,10 @@
       <tr>      
         <td colspan="5" style="text-align: right;"><i>${t.Comment}</i></td>
       </tr>`;
-      }).join("\n");
+    }).join("\n");
 
-      const template =
-        `
+ const template = 
+ `
  <table style="margin: auto; text-align: left;">
    <tr>
      <th style="min-width: 150px;">Date</th>
@@ -461,40 +401,38 @@
    ${dataRows}
  </table>
  `;
+ 
+  document.getElementById("data").innerHTML = template;
+  document.getElementById("output").scrollIntoView();
+}
 
-      document.getElementById("data").innerHTML = template;
-      document.getElementById("output").scrollIntoView();
-    }
 
+// --- FILE HANDLER ---
+async function handleFile(file) {
 
-    // --- FILE HANDLER ---
-    async function handleFile(file) {
+  const data = await file.arrayBuffer();
+  const workbook = XLSX.read(data);
 
-      const data = await file.arrayBuffer();
-      const workbook = XLSX.read(data);
+  const sheet = workbook.Sheets[workbook.SheetNames[0]];
+  const rows = XLSX.utils.sheet_to_json(sheet, {
+  header: [
+    "id",
+    "happened_at",
+    "workout_name",
+    "workout_description",
+    "workout_type",
+    "result_type",
+    "result",
+    "comment"
+  ]
+});
 
-      const sheet = workbook.Sheets[workbook.SheetNames[0]];
-      const rows = XLSX.utils.sheet_to_json(sheet, {
-        header: [
-          "id",
-          "happened_at",
-          "workout_name",
-          "workout_description",
-          "workout_type",
-          "result_type",
-          "result",
-          "comment"
-        ]
-      });
-
-      const transformed = transformJournalToCSV(rows);
-      if (transformed) {
-        createResults(transformed);
-        downloadCSV(transformed);
-      }
-    }
-  </script>
+  const transformed = transformJournalToCSV(rows);
+  
+  createResults(transformed);
+  downloadCSV(transformed);
+}
+</script>
 
 </body>
-
 </html>
